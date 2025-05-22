@@ -16,7 +16,7 @@ function App() {
         setLoading(true);
 
         try {
-            const response = await axios.post('https://cors-anywhere.herokuapp.com/http://16.171.160.20:8000/predict/vit', { SMILES: smiles });
+            const response = await axios.post('https://16.171.160.20/predict/vit', { SMILES: smiles });
             setResult(response.data);
         } catch (err) {
             setError(err.response?.data?.detail || 'An error occurred');
