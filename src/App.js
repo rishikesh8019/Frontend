@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import https from 'https';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
-// Create Axios instance to bypass self-signed certificate errors (testing only)
-const instance = axios.create({
-    httpsAgent: new https.Agent({
-        rejectUnauthorized: false // Ignore SSL certificate errors
-    })
-});
 
 function App() {
     const [smiles, setSmiles] = useState('');
@@ -24,7 +16,7 @@ function App() {
         setLoading(true);
 
         try {
-            const response = await instance.post('https://16.171.160.20/predict/vit', { SMILES: smiles });
+            const response = await axios.post('https://16.171.160.20/predict/vit', { SMILES: smiles });
             setResult(response.data);
         } catch (err) {
             setError(err.response?.data?.detail || 'An error occurred: ' + err.message);
